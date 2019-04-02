@@ -27,7 +27,7 @@ export default {
       title: 'this is hello world',
       content: '写点什么呢？'
     }
-  },
+  }
 }
 </script>
 
