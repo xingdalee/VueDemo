@@ -1,11 +1,20 @@
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
 import createRouter from './config/router'
+import createStore from './store/store'
 Vue.config.productionTip = false
 Vue.use(VueRouter)
+Vue.use(Vuex)
+const store = createStore()
+// 动态的加载vuwx模块
+store.registerModule('c', {
+  state: {
+    text: 22222213
+  }
+})
 const router = createRouter()
-
 // 全局导航守卫，每次路由跳转的时候都会触发这个些钩子
 
 // 应用场景(非常重要)：比如没有登录的用户不能看某些页面，权限设置
@@ -39,5 +48,6 @@ router.afterEach((to, from) => {
 })
 new Vue({
   router, // 注入
+  store,
   render: h => h(App)
 }).$mount('#app')

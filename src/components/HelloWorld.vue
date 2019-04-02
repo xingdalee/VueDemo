@@ -12,11 +12,23 @@
     </ul>
     <!-- 演示带参路由 -->
     <button @click="toLogin">去登录页面</button>
+    <hr /> 演示Mutation的用法 点击一次 handleMutation 会自动加1： {{count}}
+    <!-- 演示vuex的使用 -->
+    <button @click="handleMutation">handleMutation</button>
+    <hr /> 演示getters的用法:大家好，我的名字叫: {{name}}
+    <button @click="handleGetters">handleGetters</button>
+    <button @click="name = ''">清除名字</button>
+    <hr /> 演示actions的用法(异步),点击handleActions后开始2秒后显示5: {{actionCount}}
+    <button @click="handleActions">handleActions</button>
   </div>
 </template>
 
 <script>
   import todoItem from './todo-item.vue'
+  // 第二种获取state的方法
+  // import {
+  //   mapState
+  // } from 'vuex'
   export default {
     name: 'HelloWorld',
     components: {
@@ -28,9 +40,25 @@
     data() {
       return {
         inputValue: '',
-        list: []
+        list: [],
+        num: 0,
+        name: ''
       }
     },
+    // 第一种获取state的方法
+    computed: {
+      count() {
+        return this.$store.state.count
+      },
+      actionCount() {
+        return this.$store.state.actionCount
+      }
+    },
+    // 第二种获取state的方法
+    // computed: mapState({
+    //   // 箭头函数可使代码更简练
+    //   count: state => state.count
+    // }),
     methods: {
       handleSubmit() {
         if (!this.inputValue) {
@@ -51,6 +79,20 @@
           query: {
             id: 1
           }
+        })
+      },
+      handleMutation() {
+        // 修改代码通过mutation
+        this.$store.commit('updateCount', this.num++)
+      },
+      handleGetters() {
+        this.name = this.$store.getters.fullName
+      },
+      handleActions() {
+        // 操作action必须使用dispatch
+        this.$store.dispatch('updateCountAsync', {
+          num: 5,
+          time: 2000
         })
       }
     },
