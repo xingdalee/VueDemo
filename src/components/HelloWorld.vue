@@ -1,16 +1,21 @@
 <template>
+  <!-- 什么时候需要拆分组件呢？当一个功能非常的复杂和强大时，需要解耦和复用 -->
   <div class="hello">
    <input v-model="inputValue">
    <button @click="handleSubmit">提交</button>
    <ul>
-     <li v-for="(item, index) in list" :key="index">{{item}}</li>
+    <todoItem v-for="(item, index) in list" :key="index" :content="item"></todoItem>
    </ul>
   </div>
 </template>
 
 <script>
+import todoItem from './todo-item.vue'
 export default {
   name: 'HelloWorld',
+  components: {
+    todoItem
+  },
   props: {
     msg: String
   },
@@ -32,7 +37,6 @@ export default {
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .hello {
   text-align: left
