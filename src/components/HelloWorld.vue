@@ -46,19 +46,19 @@
     },
     // 生命周期
     beforeCreate() {
-      console.log(this, 'beforeCreate')
+      console.log(this.$el, 'beforeCreate')
     },
     // （在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，属性和方法的运算，
-    // watch/event 事件回调。然而，挂载阶段还没开始，$el 属性目前不可见
+    // watch/event 事件回调。然而，挂载阶段还没开始，$el 属性目前不可见,不能做dom操作
     created() {
-      console.log(this, 'created')
+      console.log(this.$el, 'created')
     },
     beforeMount() {
-      console.log(this, 'beforeMount')
+      console.log(this.$el, 'beforeMount')
     },
-    // 只有在成功挂载实例的时候才会执行
+    // 只有在成功挂载实例的时候才会执行，服务端渲染的时候不会被调用
     mounted() {
-      console.log(this, 'mounted')
+      console.log(this.$el, 'mounted')
     },
     // beforeUpdate和updated只有在数据更新的时候才会执行 如：输入数据
     beforeUpdate() {
