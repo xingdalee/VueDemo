@@ -10,6 +10,8 @@
       <!--  @deleteItem='handleDelete'的意思是说 父组件监听子组件是否触发deleteItem事件 -->
       <todoItem v-for="(item, index) in list" :key="index" :content="item" :index="index" @deleteItem='handleDelete'></todoItem>
     </ul>
+    <!-- 演示带参路由 -->
+    <button @click="toLogin">去登录页面</button>
   </div>
 </template>
 
@@ -42,6 +44,14 @@
       },
       destroyHello() {
         this.$destroy()
+      },
+      toLogin() {
+        this.$router.push({
+          name: 'login',
+          query: {
+            id: 1
+          }
+        })
       }
     },
     // 生命周期
